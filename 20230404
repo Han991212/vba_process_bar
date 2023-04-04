@@ -1,0 +1,18 @@
+Sub LoopThroughFiles()
+    Dim MyFolder As String, MyFile As String
+    Dim wb As Workbook
+    Dim ws As Worksheet
+    MyFolder = "C:\myfolder\" '指定文件夹路径
+    MyFile = Dir(MyFolder & "*.xlsx") '获取符合条件的第一个文件
+    While MyFile <> ""
+        '启动Excel应用程序
+        Set wb = Workbooks.Open(MyFolder & MyFile)
+        Set ws = wb.Sheets(1) '获取第一个工作表
+        '检查B2单元格是否有值"xxxhhh"
+        If ws.Range("B2").Value = "xxxhhh" Then
+            Debug.Print MyFolder & MyFile '输出文件名至调试窗口
+        End If
+        wb.Close False '关闭工作簿，不保存修改
+        MyFile = Dir '获取下一个符合条件的文件
+    Wend
+End Sub
